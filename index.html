@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>My Sports Card Store</title>
+  <style>
+    body { font-family: sans-serif; max-width: 800px; margin: auto; }
+    .card { border: 1px solid #ccc; padding: 10px; margin: 10px 0; position: relative; }
+    .sold { position: absolute; top: 10px; right: 10px; background: red; color: white; padding: 5px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>My Sports Card Collection</h1>
+  <div id="cards"></div>
+
+  <script>
+    // Your cards; edit title, price, url, and status manually here
+    const cards = [
+      {
+        title: "2021 Topps Player X",
+        price: 12.50,
+        listingUrl: "https://www.ebay.com/itm/EXAMPLE",
+        status: "available"
+      },
+      {
+        title: "2020 Panini Player Y",
+        price: 8.00,
+        listingUrl: "https://www.ebay.com/itm/EXAMPLE2",
+        status: "sold"
+      }
+    ];
+
+    function render() {
+      const container = document.getElementById("cards");
+      container.innerHTML = "";
+      cards.forEach(c => {
+        const div = document.createElement("div");
+        div.className = "card";
+        if (c.status === "sold") {
+          const badge = document.createElement("div");
+          badge.className = "sold";
+          badge.textContent = "SOLD";
+          div.appendChild(badge);
+        }
+        div.innerHTML += `
+          <h2>${c.title}</h2>
+          <p>Price: $${c.price.toFixed(2)}</p>
+          <p><a href="${c.listingUrl}" target="_blank">View on eBay</a></p>
+          <p>Status: ${c.status}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>
